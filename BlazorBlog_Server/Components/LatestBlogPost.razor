@@ -1,0 +1,34 @@
+﻿@inject IBlogsRepository blogsRepository;
+
+<div class="container">
+
+    <div class="col-md-9">
+        <SliderComponent />
+
+      @if (Blogs != null && Blogs.Any())
+      {
+          @foreach (var item in Blogs)
+          {
+              <SinglePost Blogs="item" />
+          }
+      }
+
+
+    </div>
+
+</div>
+
+@code{
+
+    private IEnumerable<BlogsDTO> Blogs { get; set; } = new List<BlogsDTO>();
+
+
+    protected  override async Task OnInitializedAsync()
+    {
+        Blogs = await blogsRepository.GetAllBlogsByCount(9);
+    }
+
+
+
+}
+

@@ -1,0 +1,161 @@
+﻿@page "/blogs/blogs"
+@inject IBlogsRepository blogsRepository
+@inject IJSRuntime jsRuntime
+@inject IFileUploadService fileUploadService
+
+@attribute [Authorize]
+
+
+<div class="row mg-4">
+    <div class=col-8>
+        <h4 class="card-title text-info"> لیست مطالب وبلاگ </h4>
+    </div>
+    <div class="col-3 offset-1">
+        <NavLink href="blogs/add-blogs" class="btn btn-info form-control">
+            ایجاد وبلاگ جدید
+        </NavLink>
+
+
+    </div>
+
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-bordered table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <td>عنوان</td>
+                        <td>توضیحات کوتاه</td>
+                        <td>تاریخ ثبت</td>
+                        <td>عملیات</td>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Blogs.Any())
+                    {
+
+                        foreach (var item in Blogs)
+                        {
+
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.SmallDescription</td>
+                                <td>@item.CreateDate.ToPersianDate()</td>
+                                <td>
+                                    <NavLink href="@($"/blogs/edit-blogs/{item.BlogId}")" class="btn btn-warning btn-block">ویرایش</NavLink>
+                                    <button class="btn btn-danger btn-block" @onclick="()=> HandleDelete(item.BlogId)">حذف وبلاگ</button>
+                                    @*                            <a class="btn btn-success btn-block" @onclick="ToastrSuccess" >موفقیت</a>
+                                        <a class="btn btn-danger btn-block" @onclick="ToastrError" >خطا</a>
+
+                                        <a class="btn btn-success btn-block" @onclick="SwaSuccess" >Success</a>
+                                        <a class="btn btn-danger btn-block" @onclick="SwaError" >Error</a>*@
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>هیچ وبلاگی یافت نشد</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+</div>
+
+<DeleteConfirm IsParentComponentProcessing="IsProcessing" ConfirmationChanged="ConfirmDelete_Click"></DeleteConfirm>
+
+
+@code {
+    private IEnumerable<BlogsDTO> Blogs { get; set; } = new List<BlogsDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+       
+        Blogs = await blogsRepository.GetAllBlogs();
+    }
+
+
+
+    private string confMessage = "ایا میخواهید این وبلاگ را ویرایش کنید؟";
+
+    public bool IsConfirm { get; set; }
+    private int? DeleteBlogId { get; set; } = null;
+
+    public bool IsProcessing { get; set; } = false;
+
+    private async Task ConfirmMessage()
+    {
+        IsConfirm = await jsRuntime.InvokeAsync<bool>("confirm", confMessage);
+    }
+
+ 
+
+    private  async Task HandleDelete(int blogId)
+    {
+        DeleteBlogId = blogId;
+        await jsRuntime.InvokeVoidAsync("showConfirmDelete");
+    }
+
+    //--------Delete Blogs With Image ------------------------//
+    public async Task ConfirmDelete_Click(bool isConfirmed)
+    {
+        IsProcessing = true;
+        if (isConfirmed && DeleteBlogId !=null)
+        {
+            var blogs = await blogsRepository.GetBlogById(DeleteBlogId.Value);
+            await blogsRepository.RemoveBlog(blogs);
+            fileUploadService.DeleteFile(blogs.ImageName);
+            await jsRuntime.ToastrSuccess("وبلاگ مورد نظر با موفقیت حذف گردید");
+            Blogs = await blogsRepository.GetAllBlogs();
+
+        }
+
+        await jsRuntime.InvokeVoidAsync("hideConfirmDelete");
+        IsProcessing = false;
+    }
+
+    //private async Task ToastrSuccess()
+    //{
+    //    await jsRuntime.InvokeVoidAsync("ShowToastr", "success", "عملیات موفق");
+    //}
+
+    //private async Task ToastrError()
+    //{
+    //    await jsRuntime.InvokeVoidAsync("ShowToastr", "error", "عملیات خطا");
+    //}
+
+    private async Task ToastrSuccess()
+    {
+        await jsRuntime.ToastrSuccess("عملیات موفق جدید");
+    }
+
+    private async Task ToastrError()
+    {
+        await jsRuntime.ToastrError("عملیات خطا جدید");
+    }
+
+    //-------Sweet Alert -------------//
+
+    private async Task SwaSuccess()
+    {
+        await jsRuntime.InvokeVoidAsync("ShowSweetAlert", "success", "عملیات موفق");
+    }
+
+    private async Task SwaError()
+    {
+        await jsRuntime.InvokeVoidAsync("ShowSweetAlert", "error", "عملیات خطا");
+    }
+
+
+}

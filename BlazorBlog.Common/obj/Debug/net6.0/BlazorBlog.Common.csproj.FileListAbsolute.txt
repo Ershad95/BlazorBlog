@@ -1,0 +1,12 @@
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\bin\Debug\net6.0\BlazorBlog.Common.deps.json
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\bin\Debug\net6.0\BlazorBlog.Common.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\bin\Debug\net6.0\ref\BlazorBlog.Common.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\bin\Debug\net6.0\BlazorBlog.Common.pdb
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.csproj.AssemblyReference.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.AssemblyInfoInputs.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.AssemblyInfo.cs
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.csproj.CoreCompileInputs.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\ref\BlazorBlog.Common.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Common\obj\Debug\net6.0\BlazorBlog.Common.pdb

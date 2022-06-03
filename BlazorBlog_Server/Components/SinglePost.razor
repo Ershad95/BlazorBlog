@@ -1,0 +1,26 @@
+﻿<div class="col-md-4">
+    <NavLink href="@($"/blog-details/{Blogs.BlogId}")">
+        <div class="post-content">
+            <figure>
+                <img src="/images/@Blogs.ImageName">
+                <figcaption class="hover-fig">
+                    <i class="fa fa-plus"></i>
+                </figcaption>
+                <figcaption class="date-fig">
+                    <span>@Blogs.CreateDate.ToPersianDate()</span>
+                    <i class="fa fa-date"></i>
+                </figcaption>
+            </figure>
+            <span>@Blogs.Title</span>
+            <p>@Blogs.SmallDescription</p>
+        </div>
+    </NavLink>
+</div>
+
+
+@code{
+
+   [Parameter]
+    public BlogsDTO Blogs { get; set; }
+
+}

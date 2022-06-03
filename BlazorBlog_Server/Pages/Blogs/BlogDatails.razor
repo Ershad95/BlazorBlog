@@ -1,0 +1,32 @@
+﻿@page "/blog-details/{Id:int}"
+@inject IBlogsRepository blogsRepository
+
+<div class="single-content">
+    <div class="single-img">
+        <img src="/images/@BlogsDto.ImageName">
+    </div>
+    <div class="single-meta">
+       @* <span>@BlogsDto.CreateDate.ToPersianDate()</span>*@
+    </div>
+    <div class="single-title">
+        <h1>@BlogsDto.Title</h1>
+    </div>
+    <p>@((MarkupString)BlogsDto.Description)</p>
+    <hr>
+
+
+</div>
+
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+
+    public BlogsDTO BlogsDto { get; set; } = new BlogsDTO();
+
+    protected override async Task OnInitializedAsync()
+    {
+        BlogsDto = await blogsRepository.GetBlogById(Id.Value);
+    }
+
+}

@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "0579e032-64b4-4a95-85eb-46c4b6fb771c": {
+      "ProjectGuid": "0579e032-64b4-4a95-85eb-46c4b6fb771c",
+      "DisplayName": "BlazorBlog_Server",
+      "ColorIndex": 0
+    },
+    "17db2542-e83d-415c-a95f-7e1f369e08c8": {
+      "ProjectGuid": "17db2542-e83d-415c-a95f-7e1f369e08c8",
+      "DisplayName": "BlazorBlog.Data",
+      "ColorIndex": 1
+    },
+    "fdfae1cd-463f-48c4-ad22-2b8e6d0167d4": {
+      "ProjectGuid": "fdfae1cd-463f-48c4-ad22-2b8e6d0167d4",
+      "DisplayName": "BlazorBlog.Model",
+      "ColorIndex": 2
+    },
+    "8855ed9d-e4a9-4622-98b9-67183dce5069": {
+      "ProjectGuid": "8855ed9d-e4a9-4622-98b9-67183dce5069",
+      "DisplayName": "BlazorBlog.Business",
+      "ColorIndex": 3
+    },
+    "685a6133-70f8-46a8-acca-b9ee3fb31ad3": {
+      "ProjectGuid": "685a6133-70f8-46a8-acca-b9ee3fb31ad3",
+      "DisplayName": "BlazorBlog.Common",
+      "ColorIndex": 4
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 5
+}

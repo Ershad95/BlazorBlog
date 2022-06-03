@@ -1,0 +1,17 @@
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Business.deps.json
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Business.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\ref\BlazorBlog.Business.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Business.pdb
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Data.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Model.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Data.pdb
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\bin\Debug\net6.0\BlazorBlog.Model.pdb
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.csproj.AssemblyReference.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.AssemblyInfoInputs.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.AssemblyInfo.cs
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.csproj.CoreCompileInputs.cache
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.csproj.CopyComplete
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\ref\BlazorBlog.Business.dll
+C:\Users\Behnam\Desktop\Projects\BlazorBlog\BlazorBlog.Business\obj\Debug\net6.0\BlazorBlog.Business.pdb

@@ -1,0 +1,172 @@
+﻿@page "/blogs/add-blogs"
+@page "/blogs/edit-blogs/{id:int}"
+@using BlazorBlog_Server.Services.IServices
+@inject IBlogsRepository blogsRepository
+@inject IJSRuntime jsRuntime
+@inject NavigationManager navigationManager
+@inject IFileUploadService fileUploadService
+
+@*@attribute [Authorize]*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <EditForm Model="BlogsModel" OnValidSubmit="HandleUpsertBlog">
+                    <DataAnnotationsValidator />
+                    @* <ValidationSummary />*@
+                    <div class="col-md-9">
+                        <label>عنوان</label>
+                        <InputText class="form-control" @bind-Value="BlogsModel.Title" placeholder="عنوان وبلاگ" />
+                        <ValidationMessage style="color:red" For="()=> BlogsModel.Title" />
+                    </div>
+
+                    <div class="col-md-9">
+                        <label>توضیحات کوتاه</label>
+                        <InputTextArea class="form-control" @bind-Value="BlogsModel.SmallDescription" placeholder="توضیحات کوتاه وبلاگ" />
+                        <ValidationMessage style="color:red" For="()=> BlogsModel.SmallDescription" />
+                    </div>
+
+                    <div class="col-md-9">
+                        <label>توضیحات</label>
+                        @*  <InputTextArea class="form-control" @bind-Value="BlogsModel.Description" placeholder="توضیحات" />*@
+                        <CKEditorBlazor Id="MyEditor" @bind-Value=@BlogsModel.Description UrlToPostImage="https://localhost:44394/upload/"> </CKEditorBlazor>
+                        <ValidationMessage style="color:red" For="()=> BlogsModel.Description" />
+                    </div>
+
+                    <div class="col-md-9">
+                        <label>تصویر وبلاگ</label>
+                        <InputFile OnChange="HandleImageUpload" />
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(BlogsModel.ImageName))
+                    {
+                        <div class="row mt-2 center-block">
+                            <div class="col-md-4 center-block ">
+                                <img class="img-rounded center-block" src="/images/@BlogsModel.ImageName" />
+                                <hr />
+                                <a class="btn btn-danger" @onclick="()=> HandleDeleteImage()"><i class="fa fa-remove"></i>حذف تصویر</a>
+                            </div>
+
+                        </div>
+                    }
+
+                    <div class="col-md-9">
+                        <button type="submit" class="btn btn-success"> @Title وبلاگ</button>
+                    </div>
+
+                </EditForm>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; }
+
+    public string Title { get; set; } = "ثبت";
+
+    private BlogsDTO BlogsModel { get; set; } = new BlogsDTO();
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var authenticationState = await AuthenticationState;
+
+        if (!authenticationState.User.Identity.IsAuthenticated) //اگر لاگین نشده بود
+        {
+            var uri = new Uri(navigationManager.Uri);
+            navigationManager.NavigateTo($"/Identity/Account/Login?returnUrl={uri.LocalPath}");
+        }
+        if (Id != null)
+        {
+            //update
+            Title = "ویرایش";
+            BlogsModel = await blogsRepository.GetBlogById(Id.Value);
+        }
+        else
+        {
+            //create
+        }
+
+    }
+
+    private async Task HandleUpsertBlog()
+    {
+
+        try
+        {
+            if (BlogsModel.BlogId != 0) //update
+            {
+                var editResult = await blogsRepository.UpdateBlog(BlogsModel.BlogId, BlogsModel);
+                await jsRuntime.ToastrSuccess("اطلاعات با موفقیت ویرایش گردید");
+            }
+            else // insert
+            {
+
+                var addBlog = await blogsRepository.CreateBlog(BlogsModel);
+                await jsRuntime.ToastrSuccess("وبلاگ با موفقیت ثبت گردید");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
+        navigationManager.NavigateTo("blogs/blogs");
+    }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            FileInfo fileInfo = new FileInfo(e.File.Name);
+            if (fileInfo.Extension.ToLower() == ".jpg" ||
+                fileInfo.Extension.ToLower() == ".jpeg" ||
+                fileInfo.Extension.ToLower() == ".png")
+            {
+                BlogsModel.ImageName = await fileUploadService.UploadFile(e.File);
+
+            }
+            else
+            {
+                jsRuntime.ToastrError("فایل انتخاب شده معتبر نمی باشد");
+            }
+
+
+        }
+        catch (Exception ex)
+        {
+
+            Console.WriteLine(ex);
+            throw;
+        }
+    }
+
+    private async Task HandleDeleteImage()
+    {
+        try
+        {
+            var result = fileUploadService.DeleteFile(BlogsModel.ImageName);
+            if (result)
+            {
+                BlogsModel.ImageName = "";
+            }
+        }
+        catch (Exception ex)
+        {
+            await jsRuntime.ToastrError(ex.Message);
+        }
+    }
+
+}

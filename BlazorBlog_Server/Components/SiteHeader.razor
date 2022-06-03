@@ -1,0 +1,71 @@
+﻿
+<div class="main-menu">
+    <div class="container">
+        <ul>
+            <li>
+
+                <NavLink href="Blogs/blogs">
+                    نمایش لیست وبلاگ ها
+                </NavLink>
+            </li>
+            <li>
+
+                <NavLink href="Blogs/add-blogs">
+                    ایجاد وبلاگ جدید
+                </NavLink>
+            </li>
+            <li><a href="#">صفحه اصلی</a></li>
+         
+            <li><a href="#">درباره</a></li>
+            <AuthorizeView>
+                <Authorized>
+                    <NavLink href="Identity/Account/Logout">
+                        خروج
+                    </NavLink>
+                </Authorized>
+
+                <NotAuthorized>
+                    <li>
+
+                        <NavLink href="Identity/Account/Register">
+                            ثبت نام
+                        </NavLink>
+                    </li>
+
+                    <li>
+
+                        <NavLink href="Identity/Account/Login">
+                            ورود
+                        </NavLink>
+                    </li>
+                </NotAuthorized>
+            </AuthorizeView>
+
+        </ul>
+    </div>
+</div>
+<div class="top-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="/site/img/logo.png" alt="" class="logo">
+            </div>
+            <div class="col-md-5">
+                <form method="" action="" class="search-form">
+                    <input type="text" name="" placeholder="جستجو کنید ...">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="index-h1">
+                    <h1>بهترین و متفاوت ترین مقالات آموزشی</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<center>
+    <p style="font-size: 16px;color: #444;">آخرین مطالب وبلاگ</p>
+</center>
+<hr>
